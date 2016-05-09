@@ -237,7 +237,7 @@ static Local<Object> js_OCDiscoveryPayload(OCDiscoveryPayload *payload) {
 
   if (payload->sid) {
     Nan::Set(returnValue, Nan::New("sid").ToLocalChecked(),
-             js_SID(payload->sid));
+             js_SID(reinterpret_cast<unsigned char *>(payload->sid)));
   }
 
   // Count the resources
@@ -266,7 +266,7 @@ static Local<Object> js_OCDevicePayload(OCDevicePayload *payload) {
 
   if (payload->sid) {
     Nan::Set(returnValue, Nan::New("sid").ToLocalChecked(),
-             js_SID(payload->sid));
+             js_SID(reinterpret_cast<unsigned char *>(payload->sid)));
   }
 
   SET_STRING_IF_NOT_NULL(returnValue, payload, deviceName);

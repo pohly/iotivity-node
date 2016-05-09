@@ -60,7 +60,7 @@
 #define SET_STRING_IF_NOT_NULL(destination, source, memberName)     \
   if ((source)->memberName) {                                       \
     Nan::Set((destination), Nan::New(#memberName).ToLocalChecked(), \
-             Nan::New((source)->memberName).ToLocalChecked());      \
+             Nan::New(reinterpret_cast<const char *>((source)->memberName)).ToLocalChecked()); \
   }
 
 #define SET_VALUE_ON_OBJECT(destination, type, source, memberName) \
